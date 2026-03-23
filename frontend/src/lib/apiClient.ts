@@ -2,7 +2,11 @@ import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000/api';
 
-const apiClient = axios.create({ baseURL: API_URL, withCredentials: true });
+const apiClient = axios.create({
+  baseURL: API_URL,
+  withCredentials: true,
+  timeout: 10000,
+});
 
 apiClient.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   if (typeof window !== 'undefined' && window.__accessToken) {

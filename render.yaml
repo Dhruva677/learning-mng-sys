@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: kodemy-backend
+    env: node
+    plan: free
+    buildCommand: npm install --prefix backend && npx prisma generate --schema=backend/prisma/schema.prisma && npm run build --prefix backend
+    startCommand: npx prisma migrate deploy --schema=backend/prisma/schema.prisma && npm start --prefix backend
+    envVars:
+      - key: DATABASE_URL
+        scope: build
+      - key: JWT_ACCESS_SECRET
+        scope: build
+      - key: JWT_REFRESH_SECRET
+        scope: build
+      - key: FRONTEND_URL
+        scope: build
+      - key: SEED_SECRET
+        scope: build
+      - key: NODE_ENV
+        value: production
