@@ -3,8 +3,8 @@ services:
     name: kodemy-backend
     env: node
     plan: free
-    buildCommand: npm install --prefix backend && npx prisma generate --schema=backend/prisma/schema.prisma && npm run build --prefix backend
-    startCommand: npx prisma migrate deploy --schema=backend/prisma/schema.prisma && npm start --prefix backend
+    buildCommand: npm install --prefix backend && cd backend && npx prisma generate && npm run build
+    startCommand: cd backend && npx prisma migrate deploy && npm start
     envVars:
       - key: DATABASE_URL
         scope: build
